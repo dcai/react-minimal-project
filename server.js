@@ -16,9 +16,9 @@ config.entry.unshift("webpack/hot/dev-server");
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
-	contentBase: "./build/",
+  contentBase: "./build/",
   publicPath: config.output.publicPath,
-	stats: { colors: true },
+  stats: { colors: true },
   historyApiFallback: true
 }).listen(port, host, function (err, result) {
   if (err) {
