@@ -12,7 +12,8 @@ const debug = process.env.NODE_ENV === 'production' ? false : true;
 const config = {
   devtool: debug ? 'eval' : 'cheap-module-source-map',
   entry: {
-    vendor: ['react'],
+    //vendor: Object.keys(npmpackage.dependencies),
+    vendor: ['react', 'react-dom'],
     index: ['./src/index.jsx']
   },
   output: {
@@ -21,6 +22,8 @@ const config = {
     publicPath: '/dist/',
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename: 'vendor.bundle.js',
@@ -50,7 +53,7 @@ if(debug) {
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
