@@ -12,7 +12,7 @@ const debug = process.env.NODE_ENV === 'production' ? false : true;
 const config = {
   devtool: debug ? 'eval' : 'cheap-module-source-map',
   entry: {
-    vendor: ['react'],
+    vendor: Object.keys(npmpackage.dependencies),
     index: ['./src/index.jsx']
   },
   output: {
