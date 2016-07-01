@@ -15,6 +15,7 @@
   "author": "Dongsheng Cai <hi@dongsheng.org> (http://dongsheng.org/)",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "es6-promise": "^3.2.1",
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.1.0",
