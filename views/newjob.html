@@ -1,0 +1,11 @@
+{% set current_page = 'newjob' %}
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <div id="app"></div>
+</div>
+{% endblock %}
+{% block reactjs %}
+<script src="dist/vendor.bundle.js"></script>
+<script src="dist/index.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <div id="app"></div>
+</div>
+{% endblock %}
+{% block reactjs %}
+<script src="/dist/vendor.bundle.js"></script>
+<script src="/dist/index.bundle.js"></script>
+{% endblock %}
+{% block headjs %}
+<script type="text/javascript">
+var __jobDetails = {{jobDetails|raw|json}};
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% set current_page = 'home' %}
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Seek Integration</h1>
+    <p>Seek integration app for newscorp.</p>
+    <form action="/api/takeid" method="get">
+        <div class="form-group">
+            <label>Take ID</label>
+            <input type="text" name="takeid" class="form-control" placeholder="Take ID">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-default">Search</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,8 +1,8 @@
 {
-  "name": "react-hot-loading",
+  "name": "seek-integration",
   "version": "1.0.0",
-  "description": "react hot loading in action",
-  "main": "index.js",
+  "description": "seek integration for newscorp",
+  "main": "server.js",
   "engines" : { "node" : "6.2.0" },
   "scripts": {
     "start": "npm run build; NODE_ENV=production node server.js",
@@ -18,11 +18,28 @@
   "author": "Dongsheng Cai <hi@dongsheng.org> (http://dongsheng.org/)",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.13.1",
+    "node-uuid": "^1.4.7",
     "react": "^15.1.0",
+    "react-addons-shallow-compare": "^15.2.1",
     "react-dom": "^15.1.0",
-    "swig": "^1.4.2"
+    "react-jsonschema-form": "^0.36.1",
+    "react-modal": "^1.4.0",
+    "react-tinymce": "^0.5.1",
+    "swig": "^1.4.2",
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
