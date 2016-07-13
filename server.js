@@ -11,9 +11,12 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-app = helper.applyWebpackMiddleware(app);
+if (process.env.NODE_ENV !== 'production') {
+  app = helper.applyWebpackMiddleware(app);
+}
 
 app.use('/', express.static(__dirname + '/public/'));
+app.use('/static', express.static(__dirname + '/static/'));
 
 app.get('/test', (req, res) => {
   res.render('test', {});

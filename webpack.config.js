@@ -17,9 +17,9 @@ const config = {
     index: ['./src/index.jsx']
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'static'),
     filename: '[name].bundle.js',
-    publicPath: '/dist/',
+    publicPath: '/static/',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -29,6 +29,11 @@ const config = {
       filename: 'vendor.bundle.js',
       chunks: ['index'],
       minChunks: Infinity,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
     }),
   ],
   module: {
@@ -51,11 +56,6 @@ if(debug) {
   );
 } else {
   config.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
