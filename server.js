@@ -107,8 +107,7 @@ if (process.env.NODE_ENV !== 'production') {
   app = helper.applyWebpackMiddleware(app);
 }
 
-app.use('/', express.static(__dirname + '/public/'));
-app.use('/static', express.static(__dirname + '/static/'));
+app.use('/public', express.static(__dirname + '/public/'));
 
 app.get('/newjob', (req, res) => {
   res.render('newjob', {});

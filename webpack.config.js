@@ -17,9 +17,9 @@ const config = {
     index: ['./src/index.jsx']
   },
   output: {
-    path: path.join(__dirname, 'static'),
+    path: path.join(__dirname, 'public'),
     filename: '[name].bundle.js',
-    publicPath: '/static/',
+    publicPath: '/public/',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
