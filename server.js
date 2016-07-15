@@ -22,6 +22,11 @@ app.get('/test', (req, res) => {
   res.render('test', {});
 })
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).json(err);
+})
+
 app.listen(port, host, (err, result) => {
   if (err) {
     console.log(err);
