@@ -136,6 +136,9 @@ app.post('/api/post', jsonParser, (req, res) => {
 
 app.get('/list', (req, res) => {
   fetchAllAds( (ads) => {
+    ads.advertisements.forEach(ad => {
+      ad.viewLink = SEEK_API + ad._links.view.href;
+    })
     res.render('list', ads);
   });
 })

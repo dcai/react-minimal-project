@@ -4,7 +4,7 @@
 <h4>Job list</h4>
 <ul>
 {% for ad in advertisements %}
-<li><code>{{ad.jobReference}}</code> {{ ad.jobTitle }} <a href="{{ad._links.self.href}}">Edit</a></li>
+<li><code>{{ad.jobReference}}</code> {{ ad.jobTitle }} <a href="{{ad._links.self.href}}">Edit</a> <a href="{{ad.viewLink}}">View</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
