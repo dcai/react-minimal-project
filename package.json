@@ -1,7 +1,7 @@
 {
-  "name": "react-hot-loading",
+  "name": "tuxim",
   "version": "1.0.0",
-  "description": "react hot loading in action",
+  "description": "tux.im website",
   "main": "index.js",
   "engines": {
     "node": "6.2.0"
@@ -21,9 +21,13 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "^4.14.0",
+    "identicon.js": "^1.2.1",
     "isomorphic-fetch": "^2.2.1",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react": "^15.0.1",
+    "react-bootstrap": "^0.29.5",
+    "react-dom": "^15.0.1",
+    "redux": "^3.5.2",
+    "sha256-es": "^1.0.2",
     "swig": "^1.4.2"
   },
   "devDependencies": {
