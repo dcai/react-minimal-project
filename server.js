@@ -68,7 +68,7 @@ const fetchAd = (adId, cb) => {
   requestAccessToken( token => {
     const headers = {
       'Authorization': 'Bearer ' + token,
-      'Accept': 'application/vnd.seek.advertisement-list+json; version=1; charset=utf-8, application/vnd.seek.advertisement-error+json; version=1; charset=utf-8'
+      'Accept': 'application/vnd.seek.advertisement+json; version=1; charset=utf-8, application/vnd.seek.advertisement-error+json; version=1; charset=utf-8',
     };
     const api = SEEK_API + '/advertisement/' + adId;
     fetch(api, {
@@ -115,7 +115,7 @@ const fetchAllAds = (cb) => {
   requestAccessToken( token => {
     const headers = {
       'Authorization': 'Bearer ' + token,
-      'Accept': 'application/vnd.seek.advertisement-list+json; version=1; charset=utf-8, application/vnd.seek.advertisement-error+json; version=1; charset=utf-8'
+      'Accept': 'application/vnd.seek.advertisement-list+json; version=1; charset=utf-8, application/vnd.seek.advertisement-error+json; version=1; charset=utf-8',
     };
     fetch(SEEK_API + '/advertisement', {
       method: 'GET',
