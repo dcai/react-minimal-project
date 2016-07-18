@@ -30,6 +30,40 @@ const requestAccessToken = (cb) => {
   });
 }
 
+const expireAd = (adId, cb) => {
+  requestAccessToken( token => {
+    const headers = {
+      'Content-Type': 'application/vnd.seek.advertisement-patch+json; version=1; charset=utf-8',
+      'Authorization': 'Bearer ' + token,
+      'Accept': 'application/vnd.seek.advertisement+json; version=1; charset=utf-8, application/vnd.seek.advertisement-error+json; version=1; charset=utf-8',
+    };
+    const body = [
+      {
+      "path": "state",
+      "op": "replace",
+      "value": "Expired",
+      },
+    ];
+    const api = SEEK_API + '/advertisement/' + adId;
+    console.info(api);
+    fetch(api, {
+      method: 'PATCH',
+      body: JSON.stringify(body),
+      headers,
+    })
+    .then(response  => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch(e => console.info(e))
+    .then( () => {
+      cb({})
+    });
+  })
+}
+
 const fetchAd = (adId, cb) => {
   requestAccessToken( token => {
     const headers = {
@@ -120,6 +154,13 @@ app.get('/advertisement/:adId', (req, res) => {
   })
 })
 
+app.get('/expire/advertisement/:adId', (req, res) => {
+  const adId = req.params.adId;
+  expireAd(adId, () => {
+    res.redirect('/list');
+  })
+})
+
 app.get('/', (req, res) => {
   res.render('home', {});
 })
@@ -137,6 +178,7 @@ app.post('/api/post', jsonParser, (req, res) => {
 app.get('/list', (req, res) => {
   fetchAllAds( (ads) => {
     ads.advertisements.forEach(ad => {
+      console.info(ad)
       ad.viewLink = SEEK_API + ad._links.view.href;
     })
     res.render('list', ads);

@@ -3,7 +3,6 @@ import TinyMCE from 'react-tinymce';
 import Classification from './classification.jsx';
 
 export const FormSchema = {
-  title: 'Post a new job',
   type: 'object',
   required: [
     'jobTitle',
