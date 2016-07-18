@@ -9,7 +9,7 @@
 <span>{{ ad.jobTitle }}</span>
 &nbsp;<a href="{{ad._links.self.href}}">Edit</a>
 &nbsp;<a href="{{ad.viewLink}}">View</a>
-&nbsp;<a href="/expire{{ad._links.self.href}}">Expire</a>
+&nbsp;<a onclick="return confirm('Are you sure?')" href="/expire{{ad._links.self.href}}">Expire</a>
 </li>
 {% endfor %}
 </ul>

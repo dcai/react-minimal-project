@@ -157,7 +157,7 @@ app.get('/advertisement/:adId', (req, res) => {
 app.get('/expire/advertisement/:adId', (req, res) => {
   const adId = req.params.adId;
   expireAd(adId, () => {
-    res.redirect('/list');
+    res.render('expired');
   })
 })
 
