@@ -24,9 +24,6 @@ export const FormSchema = {
           type: 'string',
           default: '35679927',
         },
-        agentId: {
-          type: 'string',
-        },
       },
     },
     advertisementType: {
@@ -43,34 +40,20 @@ export const FormSchema = {
       type: 'string',
       title: 'Search Job Title',
     },
-    location: {
-      type: 'object',
-      title: 'Location',
-      properties: {
-        id: {
-          type: 'string',
-          title: 'Location ID',
-        },
-        areaId: {
-          type: 'string',
-          title: 'AreaId',
-        },
-      },
-    },
     granularLocation: {
       type: 'object',
       title: 'Granular Location',
       properties: {
-        Country: {
+        country: {
           type: 'string',
         },
-        State: {
+        state: {
           type: 'string',
         },
-        City: {
+        city: {
           type: 'string',
         },
-        PostCode: {
+        postCode: {
           type: 'number',
         },
       },
@@ -158,10 +141,6 @@ export const FormSchema = {
       type: 'string',
       title: 'Application Email',
     },
-    applicationFromUrl: {
-      type: 'string',
-      title: 'Application url',
-    },
     screenId: {
       type: 'number',
     },
@@ -173,35 +152,6 @@ export const FormSchema = {
       //type: 'string',
       //title: 'Agent Job Reference',
     //},
-    template: {
-      type: 'object',
-      title: 'Template',
-      properties: {
-        id: {
-          type: 'number',
-          title: 'ID',
-        },
-        // XXX: hack, will transform it on server side
-        items_0: {
-          'type': 'array',
-          'title': 'template items',
-          'items': {
-            'type': 'object',
-            'title': 'name value pair',
-            'properties': {
-              name: {
-                type: 'string',
-                title: 'Name',
-              },
-              value: {
-                type: 'string',
-                title: 'Value',
-              }
-            }
-          }
-        },
-      },
-    },
     //standout: {
       //type: 'object',
       //title: 'Standout',
@@ -227,7 +177,7 @@ export const FormSchema = {
         type: 'string',
         enum: [
           'ResidentsOnly',
-          'Graduate',
+          //'Graduate',
         ]
       }
     },

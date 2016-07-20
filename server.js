@@ -45,7 +45,6 @@ const expireAd = (adId, cb) => {
       },
     ];
     const api = SEEK_API + '/advertisement/' + adId;
-    console.info(api);
     fetch(api, {
       method: 'PATCH',
       body: JSON.stringify(body),
@@ -79,6 +78,7 @@ const fetchAd = (adId, cb) => {
       return response.json();
     })
     .then( ad => {
+      console.info(ad);
       cb(ad);
     });
   })
@@ -178,7 +178,6 @@ app.post('/api/post', jsonParser, (req, res) => {
 app.get('/list', (req, res) => {
   fetchAllAds( (ads) => {
     ads.advertisements.forEach(ad => {
-      console.info(ad)
       ad.viewLink = SEEK_API + ad._links.view.href;
     })
     res.render('list', ads);
