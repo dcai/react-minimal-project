@@ -46,15 +46,19 @@ export const FormSchema = {
       properties: {
         country: {
           type: 'string',
+          default: 'Australia',
         },
         state: {
           type: 'string',
+          default: 'NSW',
         },
         city: {
           type: 'string',
+          default: 'Sydney',
         },
         postCode: {
           type: 'number',
+          default: 2000,
         },
       },
     },
@@ -216,7 +220,6 @@ export const FormUISchema = {
         }}
         onChange={
           (event) => {
-            console.info(event);
             props.onChange(event.target.getContent())
           }
         }

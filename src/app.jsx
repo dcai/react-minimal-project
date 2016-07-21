@@ -69,9 +69,6 @@ export default class App extends Component {
     if (!(formData.video && formData.video.url)) {
       unset(formData, 'video');
     }
-    if (!(formData.granularLocation && formData.granularLocation.Country)) {
-      unset(formData, 'granularLocation');
-    }
     return formData;
   }
 

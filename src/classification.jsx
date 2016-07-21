@@ -17,7 +17,6 @@ export default class Classification extends Component {
         }
       })
     });
-    console.info(classId);
     this.state = {
       subclass,
       classId,
