@@ -57,7 +57,7 @@ export const FormSchema = {
           default: 'Sydney',
         },
         postCode: {
-          type: 'number',
+          type: 'string',
           default: 2000,
         },
       },
