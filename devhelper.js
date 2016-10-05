@@ -7,6 +7,7 @@ var config = require('./webpack.config');
 
 // webpack/hot/dev-server will reload the entire page if the HMR update fails
 // webpack/hot/only-dev-server reload the page manually
+config.entry.index.unshift("react-hot-loader/patch");
 config.entry.index.unshift("webpack/hot/dev-server");
 config.entry.index.unshift("webpack-hot-middleware/client");
 //config.entry.unshift("webpack/hot/only-dev-server");
