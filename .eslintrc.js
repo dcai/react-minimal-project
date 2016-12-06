@@ -16,6 +16,7 @@ module.exports = {
         "node": true
     },
     "rules": {
+        "no-unused-vars": "off",
         "linebreak-style": ["error", "unix"],
         "semi": ["error", "always"],
         "no-console": "off"
