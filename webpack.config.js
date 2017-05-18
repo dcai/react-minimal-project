@@ -23,7 +23,6 @@ const config = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename: 'vendor.bundle.js',
@@ -40,13 +39,13 @@ const config = {
     loaders: [{
       // match js or jsx
       test: /\.jsx?$/,
-      loaders: ['babel'],
+      loaders: ['babel-loader'],
       exclude: /node_modules/,
       include: path.join(__dirname, 'src')
     }]
   },
   resolve: {
-    extensions: ['', '.js', 'jsx']
+    extensions: ['.js', 'jsx']
   },
 };
 
