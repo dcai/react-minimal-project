@@ -57,12 +57,10 @@ if(debug) {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false,
-        screw_ie8: true,
+        warnings: false
       },
       comments: false,
-      sourceMap: false,
-      minimize: true,
+      sourceMap: false
     })
   );
 }
