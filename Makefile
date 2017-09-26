@@ -1,4 +1,7 @@
-all: build
+all: install_npm_packages
+install_npm_packages:
+	# yarn install --ignore-optional
+	npm install --no-optional
 build:
 	npm run build
 setup:
