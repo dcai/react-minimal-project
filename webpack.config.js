@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-
 var npmpackage = require('./package.json');
 
 function dirPath(dest){
@@ -24,7 +23,7 @@ const config = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
+      name: 'vendor',
       filename: 'vendor.bundle.js',
       chunks: ['index'],
       minChunks: Infinity,
@@ -49,7 +48,7 @@ const config = {
   }
 };
 
-if(debug) {
+if (debug) {
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin()
   );

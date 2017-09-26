@@ -1,48 +1,46 @@
+// "off" or 0 - turn the rule off
+// "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+// "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
 module.exports = {
   "root": true,
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
+  'env': {
+    "jquery": true,
+    'browser': true,
+    "node": true,
+    'es6': true
   },
   "plugins": [
+    "babel",
     "react"
-  ]
-  "extends": "eslint:recommended",
-  "env": {
-    "mocha": true,
-    "jasmine": true,
-    "jquery": true,
-    "browser": true,
-    "node": true
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    'sourceType': 'module'
   },
   "rules": {
     "indent": ["error", 2],
-    "array-bracket-spacing": [2, "never"],
-    "block-scoped-var": 2,
-    "brace-style": [2, "1tbs"],
-    "camelcase": 1,
-    "computed-property-spacing": [2, "never"],
-    "curly": 2,
-    "eol-last": 2,
-    "eqeqeq": [2, "smart"],
-    "max-depth": [1, 3],
-    "max-len": [1, 80],
-    "max-statements": [1, 15],
-    "new-cap": 1,
-    "no-extend-native": 2,
-    "no-mixed-spaces-and-tabs": 2,
-    "no-trailing-spaces": 2,
-    "no-unused-vars": 1,
-    "no-use-before-define": [2, "nofunc"],
-    "object-curly-spacing": [2, "never"],
-    "quotes": [2, "single", "avoid-escape"],
-    "semi": [2, "always"],
-    "keyword-spacing": [2, {"before": true, "after": true}],
-    "space-unary-ops": 2
+    "array-bracket-spacing": ["error", "never"],
+    "block-scoped-var": "error",
+    "brace-style": ["error", "1tbs"],
+    "camelcase": "warn",
+    "computed-property-spacing": ["error", "never"],
+    "curly": "error",
+    "eol-last": "error",
+    "eqeqeq": ["error", "smart"],
+    "max-depth": ["warn", 3],
+    "max-len": ["warn", 80],
+    "max-statements": ["warn", 15],
+    "new-cap": "warn",
+    "no-extend-native": "error",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-trailing-spaces": "error",
+    "no-unused-vars": "warn",
+    "no-use-before-define": ["error", "nofunc"],
+    "object-curly-spacing": ["error", "never"],
+    "quotes": ["error", "single", "avoid-escape"],
+    "semi": ["error", "always"],
+    "keyword-spacing": ["error", {"before": true, "after": true}],
+    "space-unary-ops": "error"
   },
   "globals": {
     "console": true

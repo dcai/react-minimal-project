@@ -3,11 +3,11 @@ var devMiddleware = require('webpack-dev-middleware');
 var hotMiddleware = require('webpack-hot-middleware');
 var webpackConfig = require('./webpack.config');
 
-webpackConfig.entry.index.unshift("react-hot-loader/patch");
+webpackConfig.entry.index.unshift('react-hot-loader/patch');
 // webpack/hot/dev-server will reload the entire page if the HMR update fails
 // webpack/hot/only-dev-server reload the page manually
-// webpackConfig.entry.index.unshift(`webpack-dev-server/client?http://${host}:${port}`);
-webpackConfig.entry.index.unshift("webpack-hot-middleware/client");
+// ...unshift(`webpack-dev-server/client?http://${host}:${port}`);
+webpackConfig.entry.index.unshift('webpack-hot-middleware/client');
 
 //enable webpack middleware for hot-reloads in development
 var compiler = webpack(webpackConfig);
