@@ -6,10 +6,10 @@ function dirPath(dest){
   return path.resolve(__dirname, dest);
 }
 
-const debug = process.env.NODE_ENV === 'production' ? false : true;
+const isProd = process.env.NODE_ENV === 'production';
 
-const config = {
-  devtool: debug ? 'eval' : 'cheap-module-source-map',
+const webpackConfig = {
+  devtool: isProd ? 'eval' : 'cheap-eval-source-map',
   entry: {
     //vendor: Object.keys(npmpackage.dependencies),
     vendor: ['react', 'react-dom'],
@@ -48,12 +48,8 @@ const config = {
   }
 };
 
-if (debug) {
-  config.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
-  );
-} else {
-  config.plugins.push(
+if (isProd) {
+  webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -62,6 +58,10 @@ if (debug) {
       sourceMap: false
     })
   );
+} else {
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
 }
 
-module.exports = config;
+module.exports = webpackConfig;
