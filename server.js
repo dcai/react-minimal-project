@@ -22,7 +22,9 @@ app.get('/test', (req, res) => {
   res.render('test', {});
 });
 
-app.use(function(err, req, res) {
+// error handling middleware must have 4 arguments
+// eslint-disable-next-line no-unused-vars
+app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).json(err);
 });
