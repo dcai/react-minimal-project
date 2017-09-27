@@ -9,7 +9,7 @@ const webpackConfig = {
   entry: {
     //vendor: Object.keys(npmpackage.dependencies),
     vendor: ['react', 'react-dom'],
-    index: ['./src/index.jsx']
+    index: ['./react/index.jsx']
   },
   output: {
     path: path.join(__dirname, 'public/assets/js'),
@@ -36,7 +36,7 @@ const webpackConfig = {
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/,
-      include: path.join(__dirname, 'src')
+      include: path.join(__dirname, 'react')
     }]
   },
   resolve: {
