@@ -7,8 +7,8 @@
     "node": ">=6.2.0"
   },
   "scripts": {
-    "start": "npm run build; NODE_ENV=production node server.js",
-    "dev-start": "NODE_ENV=development nodemon server.js --exec node",
+    "start": "npm run build; NODE_ENV=production node ./bin/server.js",
+    "dev-start": "NODE_ENV=development nodemon ./bin/server.js --exec node",
     "build": "NODE_ENV=production webpack",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -22,8 +22,12 @@
   "author": "Dongsheng Cai <hi@dongsheng.org> (http://dongsheng.org/)",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.5",
     "isomorphic-fetch": "^2.2.1",
+    "morgan": "^1.9.0",
+    "nunjucks": "^3.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",

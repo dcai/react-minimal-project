@@ -2,10 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var npmpackage = require('./package.json');
 
-function dirPath(dest){
-  return path.resolve(__dirname, dest);
-}
-
 const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = {
@@ -16,9 +12,9 @@ const webpackConfig = {
     index: ['./src/index.jsx']
   },
   output: {
-    path: path.join(__dirname, 'static'),
+    path: path.join(__dirname, 'public/assets/js'),
     filename: '[name].bundle.js',
-    publicPath: '/static/',
+    publicPath: '/assets/js/',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
