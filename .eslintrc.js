@@ -28,7 +28,7 @@ module.exports = {
     "eol-last": "error",
     "eqeqeq": ["error", "smart"],
     "max-depth": ["warn", 3],
-    "max-len": ["warn", 80],
+    "max-len": ["warn", 100],
     "max-statements": ["warn", 15],
     "new-cap": "warn",
     "no-extend-native": "error",
