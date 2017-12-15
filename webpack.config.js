@@ -5,7 +5,7 @@ var npmpackage = require('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = {
-  devtool: isProd ? 'eval' : 'cheap-eval-source-map',
+  devtool: isProd ? false : 'eval-source-map',
   entry: {
     //vendor: Object.keys(npmpackage.dependencies),
     vendor: ['react', 'react-dom'],
