@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import Button from './components/Button.jsx';
+import { connect } from 'react-redux'
+import { fetchData } from './actions.js';
 
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+  componentDidMount() {
+    this.props.fetch();
+  }
   render() {
     return (
       <div>
@@ -11,3 +20,12 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(
+  (state, ownProps) => ({
+    loading: state.ui.loading || false,
+  }),
+  (dispatch, ownProps) => ({
+    fetch: () => dispatch(fetchData())
+  })
+)(App);

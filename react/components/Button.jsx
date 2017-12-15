@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
+import { clickButton } from '../actions.js';
 
-export default class Button extends Component {
+class Button extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
   render() {
-    return <button>Click me!</button>;
+    const onClick = this.props.click.bind(this);
+    return <button onClick={onClick}>Click me!</button>;
   }
 }
+
+export default connect(
+  f => f,
+  (dispatch, ownProps) => ({
+    click: () => dispatch(clickButton())
+  })
+)(Button);
