@@ -9,7 +9,12 @@ class Button extends Component {
   }
   render() {
     const onClick = this.props.click.bind(this);
-    return <button onClick={onClick}>Click me!</button>;
+    return <button
+        type="button"
+        className="btn btn-primary btn-lg"
+        onClick={onClick}>
+        Click me!
+      </button>;
   }
 }
 
