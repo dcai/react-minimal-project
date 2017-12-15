@@ -5,9 +5,11 @@ var logger = require('morgan');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var webpack = require('webpack');
+var favicon = require('serve-favicon');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
-var test = require('./routes/test');
+var testRoute = require('./routes/test');
+var indexRoute = require('./routes/index');
 
 var isDev = process.env.NODE_ENV !== 'production';
 
@@ -69,6 +71,7 @@ function configTemplates(expressApp) {
 
 var app = express();
 app.use(logger(isDev ? 'dev' : 'common'));
+app.use(favicon(path.join(__dirname, '/../public/', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -78,8 +81,9 @@ if (isDev) {
 }
 app = configTemplates(app);
 
-app.use('/', express.static(dirPath('/../public/')));
-app.use(test);
+app.use('/assets', express.static(dirPath('/../public/assets/')));
+app.use(testRoute);
+app.use(indexRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
