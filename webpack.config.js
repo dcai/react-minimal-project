@@ -8,7 +8,7 @@ const webpackConfig = {
   devtool: isProd ? false : 'eval-source-map',
   entry: {
     //vendor: Object.keys(npmpackage.dependencies),
-    vendor: ['react', 'react-dom'],
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk'],
     index: ['./react/index.jsx']
   },
   output: {

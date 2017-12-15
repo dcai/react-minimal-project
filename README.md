@@ -1,4 +1,4 @@
-react-hot-loading
-=================
+React + Redux starter kit
+=========================
 
-Boilerplate code to setup react hot loading with webpack & express.
+Boilerplate code to setup react+redux with webpack & express.

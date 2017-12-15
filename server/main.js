@@ -1,5 +1,5 @@
-var appconfig = require('../app.config');
-var app = require('../app');
+var appconfig = require('../config');
+var app = require('./app');
 var host = process.env.HOST || appconfig.host;
 var port = process.env.PORT || appconfig.port;
 

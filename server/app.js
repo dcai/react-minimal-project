@@ -17,7 +17,7 @@ function dirPath(dest){
 }
 
 function addWebpackMiddlewaresToExpressApp(expressApp) {
-  var webpackConfig = require('./webpack.config');
+  var webpackConfig = require('../webpack.config');
   var compiler = webpack(webpackConfig);
 
   webpackConfig.entry.index.unshift('react-hot-loader/patch');
@@ -51,7 +51,8 @@ function addWebpackMiddlewaresToExpressApp(expressApp) {
 }
 
 function configTemplates(expressApp) {
-  var nunjucksEnv = nunjucks.configure('views', {
+  var templatesPath = path.join(__dirname, 'templates');
+  var nunjucksEnv = nunjucks.configure(templatesPath, {
     noCache: isDev,
     autoescape: true,
     express: expressApp
@@ -60,7 +61,7 @@ function configTemplates(expressApp) {
   nunjucksEnv.addGlobal('isDev', isDev);
 
   // view engine setup
-  expressApp.set('views', path.join(__dirname, 'views'));
+  expressApp.set('views', templatesPath);
   expressApp.set('view engine', 'html');
   return expressApp;
 }
@@ -77,7 +78,7 @@ if (isDev) {
 }
 app = configTemplates(app);
 
-app.use('/', express.static(dirPath('/public/')));
+app.use('/', express.static(dirPath('/../public/')));
 app.use(test);
 
 // catch 404 and forward to error handler

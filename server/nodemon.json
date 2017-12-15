@@ -1,10 +1,7 @@
 {
   "verbose": true,
   "watch": [
-    "app.js",
-    "bin/server.js",
-    "views/",
-    "routes/"
+    "servers/"
   ],
   "ignore": [
     ".git",

@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hot loading in action!</h1>
+        <h1>Counter { this.props.counter }</h1>
         <Button/>
       </div>
     );
@@ -23,6 +23,7 @@ class App extends Component {
 
 export default connect(
   (state, ownProps) => ({
+    counter: state.data.counter || 0,
     loading: state.ui.loading || false,
   }),
   (dispatch, ownProps) => ({

@@ -2,13 +2,13 @@
   "name": "react-minimal-project",
   "version": "1.0.0",
   "description": "react minimal project",
-  "main": "index.js",
+  "main": "server/main.js",
   "engines": {
     "node": ">=6.2.0"
   },
   "scripts": {
-    "start:prod": "npm run build; NODE_ENV=production node ./bin/server.js",
-    "start:dev": "NODE_ENV=development nodemon ./bin/server.js --exec node",
+    "start:prod": "npm run build; NODE_ENV=production node ./server/main.js",
+    "start:dev": "NODE_ENV=development nodemon ./server/main.js --exec node --config ./server/nodemon.json",
     "build": "NODE_ENV=production webpack",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
