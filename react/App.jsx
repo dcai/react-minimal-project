@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Button from './components/Button.jsx';
-import { connect } from 'react-redux'
-import { fetchData } from './actions.js';
+import React, { Component } from "react";
+import Button from "./components/Button.jsx";
+import { connect } from "react-redux";
+import { fetchData } from "./actions.js";
 
 class App extends Component {
   constructor(props) {
@@ -12,10 +12,21 @@ class App extends Component {
     this.props.fetch();
   }
   render() {
+    const items = this.props.githubData.slice(0, 5);
     return (
-      <div>
-        <h1>Counter { this.props.counter }</h1>
-        <Button/>
+      <div className="row">
+        <div className="col">
+          <h1>Counter {this.props.counter}</h1>
+          <Button />
+        </div>
+        <div className="col">
+          <h4>react repos</h4>
+          <ul>
+            {items.length > 0
+              ? items.map((item, index) => <li key={index}>{item.name}</li>)
+              : "loading"}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -23,8 +34,9 @@ class App extends Component {
 
 export default connect(
   (state, ownProps) => ({
+    githubData: state.githubData.items || [],
     counter: state.data.counter || 0,
-    loading: state.ui.loading || false,
+    loading: state.ui.loading || false
   }),
   (dispatch, ownProps) => ({
     fetch: () => dispatch(fetchData())
