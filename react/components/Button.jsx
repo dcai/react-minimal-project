@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import { clickButton } from '../actions.js';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { clickButton } from "../actions.js";
 
 class Button extends Component {
   constructor(props) {
@@ -9,12 +9,15 @@ class Button extends Component {
   }
   render() {
     const onClick = this.props.click.bind(this);
-    return <button
+    return (
+      <button
         type="button"
         className="btn btn-primary btn-lg"
-        onClick={onClick}>
+        onClick={onClick}
+      >
         Click me!
-      </button>;
+      </button>
+    );
   }
 }
 

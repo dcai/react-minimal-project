@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import { ACTION_CLICK_BUTTON, ACTION_FETCH_DATA_SUCCESS } from "./actions.js";
+import {combineReducers} from 'redux';
+import {ACTION_CLICK_BUTTON, ACTION_FETCH_DATA_SUCCESS} from './actions.js';
 
 const rootReducer = combineReducers({
   data: (state, action) => {

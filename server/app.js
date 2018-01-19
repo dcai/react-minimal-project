@@ -13,7 +13,7 @@ var indexRoute = require('./routes/index');
 
 var isDev = process.env.NODE_ENV !== 'production';
 
-function dirPath(dest){
+function dirPath(dest) {
   var filepath = __dirname + dest;
   return filepath;
 }
@@ -34,7 +34,7 @@ function addWebpackMiddlewaresToExpressApp(expressApp) {
     quiet: false,
     lazy: false,
     watchOptions: {
-      poll: true,
+      poll: true
     },
     hot: true,
     stats: {
@@ -67,7 +67,6 @@ function configTemplates(expressApp) {
   expressApp.set('view engine', 'html');
   return expressApp;
 }
-
 
 var app = express();
 app.use(logger(isDev ? 'dev' : 'common'));

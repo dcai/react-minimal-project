@@ -14,7 +14,7 @@ const webpackConfig = {
   output: {
     path: path.join(__dirname, 'public/assets/js'),
     filename: '[name].bundle.js',
-    publicPath: '/assets/js/',
+    publicPath: '/assets/js/'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -22,22 +22,24 @@ const webpackConfig = {
       name: 'vendor',
       filename: 'vendor.bundle.js',
       chunks: ['index'],
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    }),
+    })
   ],
   module: {
-    loaders: [{
-      // match js or jsx
-      test: /\.jsx?$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/,
-      include: path.join(__dirname, 'react')
-    }]
+    loaders: [
+      {
+        // match js or jsx
+        test: /\.jsx?$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'react')
+      }
+    ]
   },
   resolve: {
     extensions: ['.js', 'jsx']
@@ -55,9 +57,7 @@ if (isProd) {
     })
   );
 } else {
-  webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
-  );
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 module.exports = webpackConfig;
