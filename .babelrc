@@ -1,7 +1,14 @@
 {
     "presets": [
-        "env",
-        "react"
+        [
+          "@babel/preset-env", {
+            "targets": {
+              "browsers": ["last 2 versions", "safari >= 7"]
+            }
+          }
+        ],
+        "@babel/preset-react",
+        "@babel/preset-stage-0"
     ],
     "plugins": [
         "react-hot-loader/babel"
