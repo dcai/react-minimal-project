@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { ACTION_CLICK_BUTTON, ACTION_FETCH_DATA_LOADING, ACTION_FETCH_DATA_SUCCESS } from './actions.js';
+import {
+  FETCH_REPOS_LOADED,
+  FETCH_REPOS_LOADING,
+  ACTION_CLICK_BUTTON,
+  ACTION_FETCH_DATA_LOADING,
+  ACTION_FETCH_DATA_SUCCESS
+} from './actions.js';
 
 const rootReducer = combineReducers({
   data: (state, action) => {
@@ -18,18 +24,18 @@ const rootReducer = combineReducers({
     return state || {};
   },
   githubRepoData: (state, action) => {
-    if (action.type === ACTION_FETCH_DATA_SUCCESS) {
+    if (action.type === FETCH_REPOS_LOADED) {
       return Object.assign({}, state, action.payload);
     }
     return state || {};
   },
   ui: (state, action) => {
-    if (action.type === ACTION_FETCH_DATA_LOADING) {
+    if (action.type === FETCH_REPOS_LOADING) {
       return Object.assign({}, state, {
         loading: true
       });
     }
-    if (action.type === ACTION_FETCH_DATA_SUCCESS) {
+    if (action.type === FETCH_REPOS_LOADED) {
       return Object.assign({}, state, {
         loading: false
       });

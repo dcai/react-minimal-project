@@ -1,14 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from './Button.jsx';
-import { fetchData } from '../actions.js';
+import { fetchData, fetchGithubRepo } from '../actions.js';
 
 export class GithubRepoList extends React.Component {
   onChange(evt) {
     const query = evt.target.value;
-    if (query.length > 3) {
-      this.props.fetch(query);
+    if (query.length < 3) {
+      return;
     }
+    const { lang, per_page } = this.props;
+    // this.props.fetch(query);
+    this.props.dispatch(
+      fetchGithubRepo({
+        query,
+        lang: lang || 'js',
+        per_page: per_page || 3
+      })
+    );
   }
   render() {
     const items = this.props.githubRepoData;
@@ -37,11 +46,9 @@ export class GithubRepoList extends React.Component {
 export default connect(
   (state, ownProps) => ({
     githubRepoData: state.githubRepoData.items || [],
-    counter: state.data.counter || 0,
     loading: state.ui.loading || false
   }),
   (dispatch, ownProps) => ({
-    fetch: query =>
-      dispatch(fetchData({ query: query || 'redux', lang: ownProps.lang || 'js', per_page: ownProps.per_page || 3 }))
+    dispatch
   })
 )(GithubRepoList);
