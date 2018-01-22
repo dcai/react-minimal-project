@@ -18,7 +18,7 @@ export class GithubUser extends React.Component {
         {user.avatar_url ? (
           <div>
             <img width="64" src={user.avatar_url} alt={user.name} />
-            <h5>{user.name}</h5>
+            <a href={user.url}>{user.name}</a>
             {user.bio && <p>{user.bio}</p>}
           </div>
         ) : null}
