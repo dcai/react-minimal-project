@@ -2,31 +2,28 @@
 // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
 // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
 module.exports = {
-  "root": true,
-  'env': {
-    "jquery": true,
-    'browser': true,
-    "node": true,
-    'es6': true
+  root: true,
+  env: {
+    jquery: true,
+    browser: true,
+    node: true,
+    es6: true
   },
-  "plugins": [
-    "babel",
-    "react"
-  ],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    'sourceType': 'module'
+  plugins: ["babel", "react"],
+  parser: "babel-eslint",
+  parserOptions: {
+    sourceType: "module"
   },
-  "rules": {
-    "indent": ["error", 2],
+  rules: {
+    indent: ["error", 2],
     "array-bracket-spacing": ["error", "never"],
     "block-scoped-var": "error",
     "brace-style": ["error", "1tbs"],
-    "camelcase": "warn",
+    camelcase: "warn",
     "computed-property-spacing": ["error", "never"],
-    "curly": "error",
+    curly: "error",
     "eol-last": "error",
-    "eqeqeq": ["error", "smart"],
+    eqeqeq: ["error", "smart"],
     "max-depth": ["warn", 3],
     "max-len": ["warn", 100],
     "max-statements": ["warn", 15],
@@ -37,12 +34,12 @@ module.exports = {
     "no-unused-vars": "warn",
     "no-use-before-define": ["error", "nofunc"],
     "object-curly-spacing": ["error", "never"],
-    "quotes": ["error", "single", "avoid-escape"],
-    "semi": ["error", "always"],
-    "keyword-spacing": ["error", {"before": true, "after": true}],
+    quotes: ["error", "single", "avoid-escape"],
+    semi: ["error", "always"],
+    "keyword-spacing": ["error", { before: true, after: true }],
     "space-unary-ops": "error"
   },
-  "globals": {
-    "console": true
+  globals: {
+    console: true
   }
 };
