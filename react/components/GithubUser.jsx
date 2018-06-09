@@ -29,9 +29,9 @@ export class GithubUser extends React.Component {
 
 export default connect(
   (state, ownProps) => ({
-    user: state.githubUser
+    user: state.githubUser,
   }),
   dispatch => ({
-    dispatch: dispatch
-  })
+    dispatch: dispatch,
+  }),
 )(GithubUser);

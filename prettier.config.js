@@ -1,8 +1,17 @@
 // prettier.config.js
 module.exports = {
   tabWidth: 2,
-  singleQuote: false,
+  singleQuote: true,
   printWidth: 100,
-  trailingComma: "none",
-  parser: "flow"
+  trailingComma: 'all',
+  parser: 'flow',
+  overrides: [
+    {
+      files: ['*.json', '.babelrc'],
+      options: {
+        parser: 'json',
+        singleQuote: false,
+      },
+    },
+  ],
 };
