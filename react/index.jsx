@@ -25,11 +25,15 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const defaultStore = {
   ui: {},
   data: {
-    counter: 0
-  }
+    counter: 0,
+  },
 };
 
-const store = createStore(rootReducer, defaultStore, composeEnhancers(applyMiddleware.apply(null, middlewares)));
+const store = createStore(
+  rootReducer,
+  defaultStore,
+  composeEnhancers(applyMiddleware.apply(null, middlewares)),
+);
 
 sagaMiddleware.run(mySaga);
 
@@ -41,7 +45,7 @@ const render = Component =>
         <Component />
       </Provider>
     </AppContainer>,
-    domHook
+    domHook,
   );
 
 render(App);

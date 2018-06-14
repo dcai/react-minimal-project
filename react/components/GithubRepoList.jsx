@@ -15,8 +15,8 @@ export class GithubRepoList extends React.Component {
       fetchGithubRepo({
         query,
         lang: lang || 'js',
-        per_page: per_page || 3
-      })
+        per_page: per_page || 3,
+      }),
     );
   }
   render() {
@@ -26,14 +26,20 @@ export class GithubRepoList extends React.Component {
         <h4>react repos</h4>
         <div className="form-group">
           <label htmlFor="repoQuery">Name:</label>
-          <input type="text" onChange={this.onChange.bind(this)} className="form-control" id="repoQuery" />
+          <input
+            type="text"
+            onChange={this.onChange.bind(this)}
+            className="form-control"
+            id="repoQuery"
+          />
         </div>
         {this.props.loading && 'loading'}
         <ul>
           {items.length > 0
             ? items.map((item, index) => (
                 <li key={item.full_name}>
-                  <img src={item.owner.avatar_url} width={24} /> <a href={item.url}> {item.full_name} </a>
+                  <img src={item.owner.avatar_url} width={24} />{' '}
+                  <a href={item.url}> {item.full_name} </a>
                 </li>
               ))
             : 'start to type in text area'}
@@ -46,9 +52,9 @@ export class GithubRepoList extends React.Component {
 export default connect(
   (state, ownProps) => ({
     githubRepoData: state.githubRepoData.items || [],
-    loading: state.ui.loading || false
+    loading: state.ui.loading || false,
   }),
   (dispatch, ownProps) => ({
-    dispatch
-  })
+    dispatch,
+  }),
 )(GithubRepoList);

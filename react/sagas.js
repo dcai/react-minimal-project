@@ -1,10 +1,9 @@
-import { throttle, all, select, call, put, takeEvery, fork, takeLatest } from 'redux-saga/effects';
+import { throttle, all, select, call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { FETCH_REPOS_LOADING, FETCH_REPOS_FAILED, FETCH_REPOS_LOADED } from './actions.js';
 
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ACTION_PREFIX = 'ACTION_GITHUB_REPOS_FETCH';
-
-import { FETCH_REPOS_LOADING, FETCH_REPOS_FAILED, FETCH_REPOS_LOADED } from './actions.js';
 
 const api = url => axios.get(url).then(res => res.data);
 
@@ -39,6 +38,6 @@ export default function* rootSaga() {
       const state = yield select();
       console.info('saga action', action);
       console.info('saga state', state);
-    })
+    }),
   ]);
 }

@@ -16,6 +16,6 @@ class Button extends Component {
 export default connect(
   f => f,
   (dispatch, ownProps) => ({
-    defaultClick: () => dispatch(clickButton())
-  })
+    defaultClick: () => dispatch(clickButton()),
+  }),
 )(Button);
