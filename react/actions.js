@@ -16,12 +16,12 @@ export const fetchGithubRepo = payload => ({
 
 // redux thunk action
 export const fetchData = payload => dispatch => {
-  const { query, lang, per_page } = payload;
+  const { query, lang, perPage } = payload;
   const endpoint = 'https://api.github.com/search/repositories';
   dispatch({
     type: ACTION_FETCH_DATA_LOADING,
   });
-  const url = `${endpoint}?per_page=${per_page}&q=${query}+language:${lang}&sort=stars`;
+  const url = `${endpoint}?per_page=${perPage}&q=${query}+language:${lang}&sort=stars`;
   return axios.get(url).then(res =>
     dispatch({
       type: ACTION_FETCH_DATA_SUCCESS,

@@ -1,6 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-var npmpackage = require('./package.json');
+const path = require('path');
+const webpack = require('webpack');
+// const npmpackage = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -8,7 +8,7 @@ const webpackConfig = {
   mode: process.env.NODE_ENV,
   devtool: isProd ? false : 'eval-source-map',
   entry: {
-    //vendor: Object.keys(npmpackage.dependencies),
+    // vendor: Object.keys(npmpackage.dependencies),
     vendor: ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk'],
     index: ['./react/index.jsx'],
   },

@@ -19,10 +19,10 @@ function* fetchUser(action) {
 }
 
 function* fetchRepositories(action) {
-  const { query, lang, per_page } = action.payload;
+  const { query, lang, perPage } = action.payload;
   try {
     const endpoint = `${GITHUB_API}/search/repositories`;
-    const url = `${endpoint}?per_page=${per_page}&q=${query}+language:${lang}&sort=stars`;
+    const url = `${endpoint}?per_page=${perPage}&q=${query}+language:${lang}&sort=stars`;
     const repos = yield call(api, url);
     yield put({ type: FETCH_REPOS_LOADED, payload: repos });
   } catch (e) {

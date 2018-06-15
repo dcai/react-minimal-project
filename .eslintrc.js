@@ -23,6 +23,12 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'react/jsx-indent': 'warn',
     'import/extensions': ['error', 'ignorePackages'],
+    'no-unused-vars': 'warn',
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: true, optionalDependencies: false, peerDependencies: false },
+    ],
   },
 };

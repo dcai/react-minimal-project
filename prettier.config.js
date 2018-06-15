@@ -9,6 +9,7 @@ module.exports = {
     {
       files: ['*.json', '.babelrc'],
       options: {
+        printWidth: 800,
         parser: 'json',
         singleQuote: false,
       },

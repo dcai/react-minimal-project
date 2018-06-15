@@ -1,51 +1,50 @@
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var express = require('express');
-var logger = require('morgan');
-var nunjucks = require('nunjucks');
-var path = require('path');
-var webpack = require('webpack');
-var favicon = require('serve-favicon');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var testRoute = require('./routes/test');
-var indexRoute = require('./routes/index');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const logger = require('morgan');
+const nunjucks = require('nunjucks');
+const path = require('path');
+const favicon = require('serve-favicon');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const testRoute = require('./routes/test');
+const indexRoute = require('./routes/index');
+const webpackConfig = require('../webpack.config');
 
-var isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== 'production';
 
 function dirPath(dest) {
-  var filepath = __dirname + dest;
-  return filepath;
+  return path.join(__dirname, dest);
 }
 
 function addWebpackMiddlewaresToExpressApp(expressApp) {
-  var webpackConfig = require('../webpack.config');
-  var compiler = webpack(webpackConfig);
+  const compiler = webpack(webpackConfig);
 
   webpackConfig.entry.index.unshift('react-hot-loader/patch');
   // webpack/hot/dev-server will reload the entire page if the HMR update fails
   // webpack/hot/only-dev-server reload the page manually
   // ...unshift(`webpack-dev-server/client?http://${host}:${port}`);
   webpackConfig.entry.index.unshift('webpack-hot-middleware/client');
-  //enable webpack middleware for hot-reloads in development
-  var devMiddlewareOptions = {
+  // enable webpack middleware for hot-reloads in development
+  const devMiddlewareOptions = {
     publicPath: webpackConfig.output.publicPath,
     noInfo: false,
     quiet: false,
     lazy: false,
     watchOptions: {
-      poll: true
+      poll: true,
     },
     hot: true,
     stats: {
       colors: true,
       chunks: false,
-      'errors-only': true
-    }
+      'errors-only': true,
+    },
   };
   expressApp.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
-  var hotMiddlewareOptions = {
-    log: console.log
+  const hotMiddlewareOptions = {
+    log: console.log,
   };
   expressApp.use(webpackHotMiddleware(compiler, hotMiddlewareOptions));
 
@@ -53,11 +52,11 @@ function addWebpackMiddlewaresToExpressApp(expressApp) {
 }
 
 function configTemplates(expressApp) {
-  var templatesPath = path.join(__dirname, 'templates');
-  var nunjucksEnv = nunjucks.configure(templatesPath, {
+  const templatesPath = path.join(__dirname, 'templates');
+  const nunjucksEnv = nunjucks.configure(templatesPath, {
     noCache: isDev,
     autoescape: true,
-    express: expressApp
+    express: expressApp,
   });
 
   nunjucksEnv.addGlobal('isDev', isDev);
@@ -68,11 +67,11 @@ function configTemplates(expressApp) {
   return expressApp;
 }
 
-var app = express();
+let app = express();
 app.use(logger(isDev ? 'dev' : 'common'));
 app.use(favicon(path.join(__dirname, '/../public/', 'favicon.ico')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 if (isDev) {
@@ -85,15 +84,15 @@ app.use(testRoute);
 app.use(indexRoute);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handling middleware must have 4 arguments
 // eslint-disable-next-line no-unused-vars
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = isDev ? err : {};
   // render the error page

@@ -1,7 +1,8 @@
-var appconfig = require('../config');
-var app = require('./app');
-var host = process.env.HOST || appconfig.host;
-var port = process.env.PORT || appconfig.port;
+const appconfig = require('../config');
+const app = require('./app');
+
+const host = process.env.HOST || appconfig.host;
+const port = process.env.PORT || appconfig.port;
 
 app.listen(port, host, err => {
   if (err) {
