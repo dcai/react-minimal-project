@@ -1,12 +1,13 @@
 const appconfig = require('../config');
 const app = require('./app');
+const debug = require('debug')('nodejs');
 
 const host = process.env.HOST || appconfig.host;
 const port = process.env.PORT || appconfig.port;
 
-app.listen(port, host, err => {
+app({ debug }).listen(port, host, err => {
   if (err) {
-    console.log(err);
+    debug(err);
   }
-  console.log(`Listening at http://${host}:${port}/`);
+  debug(`Listening at http://${host}:${port}/`);
 });

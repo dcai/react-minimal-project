@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:prod": "npm run build; cross-env NODE_ENV=production node ./server/main.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server/main.js --exec node --config ./server/nodemon.json",
+    "start:dev": "cross-env NODE_ENV=development DEBUG=nodejs nodemon ./server/main.js --exec node --config ./server/nodemon.json",
     "build": "cross-env NODE_ENV=production webpack",
     "prettier": "prettier --config ./prettier.config.js --write '{server,react,__{tests,mocks}__}/**/*.js'",
     "lint": "eslint .",
@@ -51,7 +51,8 @@
     "@webpack-cli/migrate": "0.0.8",
     "babel-eslint": "^8.x",
     "babel-loader": "^8.0.0-beta",
-    "cross-env": "^5.2.0",
+    "cross-env": "^5.x",
+    "debug": "^3.x",
     "eslint": "^4.x",
     "eslint-config-airbnb": "^16.x",
     "eslint-config-prettier": "^2.x",

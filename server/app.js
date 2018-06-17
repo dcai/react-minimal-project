@@ -18,7 +18,7 @@ function dirPath(dest) {
   return path.join(__dirname, dest);
 }
 
-function addWebpackMiddlewaresToExpressApp(expressApp) {
+function addWebpackMiddlewaresToExpressApp({ app, debug }) {
   const compiler = webpack(webpackConfig);
 
   webpackConfig.entry.index.unshift('react-hot-loader/patch');
@@ -42,13 +42,13 @@ function addWebpackMiddlewaresToExpressApp(expressApp) {
       'errors-only': true,
     },
   };
-  expressApp.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
+  app.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
   const hotMiddlewareOptions = {
-    log: console.log,
+    log: debug,
   };
-  expressApp.use(webpackHotMiddleware(compiler, hotMiddlewareOptions));
+  app.use(webpackHotMiddleware(compiler, hotMiddlewareOptions));
 
-  return expressApp;
+  return app;
 }
 
 function configTemplates(expressApp) {
@@ -67,37 +67,40 @@ function configTemplates(expressApp) {
   return expressApp;
 }
 
-let app = express();
-app.use(logger(isDev ? 'dev' : 'common'));
-app.use(favicon(path.join(__dirname, '/../public/', 'favicon.ico')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+const init = ({ debug }) => {
+  let app = express();
+  app.use(logger(isDev ? 'dev' : 'common'));
+  app.use(favicon(path.join(__dirname, '/../public/', 'favicon.ico')));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cookieParser());
 
-if (isDev) {
-  app = addWebpackMiddlewaresToExpressApp(app);
-}
-app = configTemplates(app);
+  if (isDev) {
+    app = addWebpackMiddlewaresToExpressApp({ app, debug });
+  }
+  app = configTemplates(app);
 
-app.use('/assets', express.static(dirPath('/../public/assets/')));
-app.use(testRoute);
-app.use(indexRoute);
+  app.use('/assets', express.static(dirPath('/../public/assets/')));
+  app.use(testRoute);
+  app.use(indexRoute);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+  // catch 404 and forward to error handler
+  app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
 
-// error handling middleware must have 4 arguments
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = isDev ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error', err);
-});
+  // error handling middleware must have 4 arguments
+  // eslint-disable-next-line no-unused-vars
+  app.use((err, req, res, next) => {
+    res.locals.message = err.message;
+    res.locals.error = isDev ? err : {};
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error', err);
+  });
+  return app;
+};
 
-module.exports = app;
+module.exports = init;
