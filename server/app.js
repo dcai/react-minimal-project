@@ -21,11 +21,16 @@ function dirPath(dest) {
 function addWebpackMiddlewaresToExpressApp({ app, debug }) {
   const compiler = webpack(webpackConfig);
 
-  webpackConfig.entry.index.unshift('react-hot-loader/patch');
-  // webpack/hot/dev-server will reload the entire page if the HMR update fails
-  // webpack/hot/only-dev-server reload the page manually
-  // ...unshift(`webpack-dev-server/client?http://${host}:${port}`);
-  webpackConfig.entry.index.unshift('webpack-hot-middleware/client');
+  const entries = webpackConfig.entry;
+
+  Object.keys(entries).forEach(entryName => {
+    entries[entryName].unshift('react-hot-loader/patch');
+    // webpack/hot/dev-server will reload the entire page if the HMR update fails
+    // webpack/hot/only-dev-server reload the page manually
+    // ...unshift(`webpack-dev-server/client?http://${host}:${port}`);
+    entries[entryName].unshift('webpack-hot-middleware/client');
+  });
+
   // enable webpack middleware for hot-reloads in development
   const devMiddlewareOptions = {
     publicPath: webpackConfig.output.publicPath,
@@ -38,7 +43,7 @@ function addWebpackMiddlewaresToExpressApp({ app, debug }) {
     hot: true,
     stats: {
       colors: true,
-      chunks: false,
+      chunks: true,
       'errors-only': true,
     },
   };

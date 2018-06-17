@@ -1,29 +1,41 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// const npmpackage = require('./package.json');
-
-const isProd = process.env.NODE_ENV === 'production';
+const ENV = process.env.NODE_ENV;
+const isProd = ENV === 'production';
 
 const webpackConfig = {
-  mode: process.env.NODE_ENV,
+  mode: ENV,
   devtool: isProd ? false : 'eval-source-map',
   entry: {
-    // vendor: Object.keys(npmpackage.dependencies),
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'redux-thunk'],
-    index: ['./react/index.jsx'],
+    app: ['./react/index.jsx'],
   },
   output: {
-    path: path.join(__dirname, 'public/assets/js'),
+    path: path.join(__dirname, 'public/assets'),
     filename: '[name].bundle.js',
-    publicPath: '/assets/js/',
+    publicPath: '/assets/',
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        NODE_ENV: JSON.stringify(ENV),
       },
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
   ],
   module: {
@@ -36,6 +48,11 @@ const webpackConfig = {
         },
         exclude: /node_modules/,
         include: path.join(__dirname, 'react'),
+      },
+      {
+        test: /\.css$/,
+        // loaders: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },

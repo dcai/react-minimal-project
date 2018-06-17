@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap'; // import all js
 import React from 'react';
 import Button from './components/Button.jsx';
 import GithubUser from './components/GithubUser.jsx';
