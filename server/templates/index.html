@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block content %}
-<div>
-    <div id="app"></div>
-</div>
+{% block title %} react mini {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/assets/vendors.css" />
 {% endblock %}
+{% block content %}<div id="app"></div>{% endblock %}
 {% block footer %}
-    <script src="/assets/vendors.bundle.js"></script>
-    <script src="/assets/app.bundle.js"></script>
+<script src="/assets/vendors.bundle.js"></script>
+<script src="/assets/app.bundle.js"></script>
 {% endblock %}

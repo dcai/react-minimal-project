@@ -24,7 +24,6 @@ class GithubUser extends React.Component {
       <div>
         <h1>{this.props.username}</h1>
         <Button onClick={this.onClick}>Fetch userinfo</Button>
-        <hr />
         {user.avatar_url ? (
           <div>
             <img width="64" src={user.avatar_url} alt={user.name} />

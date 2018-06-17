@@ -3,19 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/assets/vendors.css" />
-    {% block head %}
     <title>{% block title %}{% endblock %}</title>
-    {% endblock %}
+    {% block head %}{% endblock %}
   </head>
   <body>
-    <div class="container">
-      {% include 'nav.html' %}
-      <div id="content">
-        {% block content %} {% endblock %}
-      </div>
-    </div> <!-- /container -->
-    {% block footer %}
-    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
   </body>
 </html>
