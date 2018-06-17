@@ -1,25 +1,23 @@
-import { AppContainer } from 'react-hot-loader';
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { compose, applyMiddleware, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
 import App from './App.jsx';
 import rootReducer from './reducers.js';
-import { compose, applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
 import mySaga from './sagas.js';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [];
-middlewares.push(thunk);
-middlewares.push(sagaMiddleware);
+const middlewares = [thunk, sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(createLogger({ diff: true }));
 }
-
+// eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const defaultStore = {
@@ -32,13 +30,13 @@ const defaultStore = {
 const store = createStore(
   rootReducer,
   defaultStore,
-  composeEnhancers(applyMiddleware.apply(null, middlewares)),
+  composeEnhancers(applyMiddleware(...middlewares)),
 );
 
 sagaMiddleware.run(mySaga);
 
 const domHook = document.getElementById('app');
-const render = Component =>
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
@@ -47,6 +45,7 @@ const render = Component =>
     </AppContainer>,
     domHook,
   );
+};
 
 render(App);
 
@@ -54,6 +53,7 @@ if (module.hot) {
   module.hot.accept('./App.jsx', () => {
     // If use Webpack in ES modules mode, you can
     // use <App /> here rather than require() a <NextApp />.
+    // eslint-disable-next-line global-require
     const NextApp = require('./App.jsx').default;
 
     render(NextApp);
