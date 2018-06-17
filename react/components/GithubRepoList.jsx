@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Button from './Button.jsx';
 import { fetchData, fetchGithubRepo } from '../actions.js';
 
-export class GithubRepoList extends React.Component {
+class GithubRepoList extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     githubRepoData: PropTypes.arrayOf(PropTypes.object),
@@ -18,12 +18,8 @@ export class GithubRepoList extends React.Component {
     loading: true,
     perPage: 3,
   };
-  constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-  }
 
-  onChange(evt) {
+  onChange = evt => {
     const query = evt.target.value;
     if (query.length < 3) {
       return;
@@ -37,7 +33,7 @@ export class GithubRepoList extends React.Component {
         perPage,
       }),
     );
-  }
+  };
 
   render() {
     const items = this.props.githubRepoData;
@@ -53,7 +49,7 @@ export class GithubRepoList extends React.Component {
         {this.props.loading && 'loading'}
         <ul>
           {items.length > 0
-            ? items.map((item, index) => (
+            ? items.map(item => (
                 <li key={item.full_name}>
                   <img alt="" src={item.owner.avatar_url} width={24} />{' '}
                   <a href={item.url}> {item.full_name} </a>
@@ -67,11 +63,11 @@ export class GithubRepoList extends React.Component {
 }
 
 export default connect(
-  (state, ownProps) => ({
+  state => ({
     githubRepoData: state.githubRepoData.items || [],
     loading: state.ui.loading || false,
   }),
-  (dispatch, ownProps) => ({
+  dispatch => ({
     dispatch,
   }),
 )(GithubRepoList);
