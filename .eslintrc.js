@@ -20,11 +20,14 @@ module.exports = {
   },
   globals: {
     console: true,
+    window: true,
+    document: true,
   },
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-indent': 'warn',
     'import/extensions': ['error', 'ignorePackages'],
+    'import/no-dynamic-require': 0,
     'no-unused-vars': 'warn',
     'import/no-extraneous-dependencies': [
       'error',

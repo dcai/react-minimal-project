@@ -8,9 +8,8 @@ const favicon = require('serve-favicon');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const testRoute = require('./routes/test');
-const indexRoute = require('./routes/index');
 const webpackConfig = require('../webpack.config');
+const fs = require('fs');
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -72,6 +71,18 @@ function configTemplates(expressApp) {
   return expressApp;
 }
 
+const requireRoutes = (app, dir) => {
+  const routesPath = path.join(__dirname, dir);
+
+  fs.readdirSync(routesPath).forEach(file => {
+    const filePath = path.join(__dirname, dir, file);
+    console.info(filePath);
+    // eslint-disable-next-line global-require
+    const route = require(filePath);
+    app.use(route);
+  });
+};
+
 const init = ({ debug }) => {
   let app = express();
   app.use(logger(isDev ? 'dev' : 'common'));
@@ -86,8 +97,7 @@ const init = ({ debug }) => {
   app = configTemplates(app);
 
   app.use('/assets', express.static(dirPath('/../public/assets/')));
-  app.use(testRoute);
-  app.use(indexRoute);
+  requireRoutes(app, 'routes');
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
