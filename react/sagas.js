@@ -1,14 +1,22 @@
 import { throttle, all, select, call, put, takeEvery } from 'redux-saga/effects';
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
 import axios from 'axios';
-import { FETCH_REPOS_LOADING, FETCH_REPOS_FAILED, FETCH_REPOS_LOADED } from './actions.js';
+import {
+  receiveUsers,
+  searchUsers,
+  FETCH_GITHUB_USER_REQUEST,
+  FETCH_REPOS_LOADING,
+  FETCH_REPOS_FAILED,
+  FETCH_REPOS_LOADED,
+} from './actions.js';
 
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ACTION_PREFIX = 'ACTION_GITHUB_REPOS_FETCH';
 
 const api = url => axios.get(url).then(res => res.data);
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action) {
+function* fetchGithubUser(action) {
   try {
     const url = `${GITHUB_API}/users/${action.payload.username}`;
     const user = yield call(api, url);
@@ -30,10 +38,34 @@ function* fetchRepositories(action) {
   }
 }
 
+function* searchUsersSaga(action) {
+  const client = new ApolloClient({
+    uri: '/graphql',
+  });
+
+  const { name } = action.payload;
+  const data = yield call(client.query, {
+    query: gql`
+      {
+        users(name: "${name}") {
+          uuid
+          name
+          phone
+          email
+          avatar
+          color
+        }
+      }
+    `,
+  });
+  yield put(receiveUsers(data));
+}
+
 export default function* rootSaga() {
   yield all([
     throttle(1000, FETCH_REPOS_LOADING, fetchRepositories),
-    takeEvery('USER_FETCH_REQUESTED', fetchUser),
+    takeEvery(FETCH_GITHUB_USER_REQUEST, fetchGithubUser),
+    takeEvery(`${searchUsers}`, searchUsersSaga),
     takeEvery('*', function* logger(action) {
       const state = yield select();
       console.info('saga action', action);

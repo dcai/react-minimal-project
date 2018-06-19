@@ -4,7 +4,7 @@ import React from 'react';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import GithubUser from './components/GithubUser.jsx';
-import GithubRepoList from './components/GithubRepoList.jsx';
+import UserSearch from './components/UserSearch.jsx';
 
 const App = () => (
   <div>
@@ -15,7 +15,7 @@ const App = () => (
           <GithubUser username="dcai" />
         </div>
         <div className="col-sm">
-          <GithubRepoList />
+          <UserSearch />
         </div>
       </div>
     </main>

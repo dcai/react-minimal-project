@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Nav = () => (
-  <div classNameName="masthead">
+  <div className="masthead">
     <nav className="navbar navbar-light bg-light justify-content-between">
       <a className="navbar-brand" href="/">
         react mini

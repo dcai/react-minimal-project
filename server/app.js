@@ -9,6 +9,9 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('../webpack.config');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
+
 const fs = require('fs');
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -76,11 +79,49 @@ const requireRoutes = (app, dir) => {
 
   fs.readdirSync(routesPath).forEach(file => {
     const filePath = path.join(__dirname, dir, file);
-    console.info(filePath);
     // eslint-disable-next-line global-require
     const route = require(filePath);
     app.use(route);
   });
+};
+
+const enableGraphql = expressApp => {
+  const typeDefs = `
+  type Query {
+    users(name: String!): [User]
+  }
+  type User {
+    uuid: String,
+    name: String,
+    phone: String,
+    email: String,
+    avatar: String,
+    color: String
+  }`;
+
+  // The resolvers
+  const resolvers = {
+    Query: {
+      users: (root, args) => {
+        const { name } = args;
+        // eslint-disable-next-line global-require
+        const users = require('./data.json');
+        const matched = users.filter(
+          user => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1,
+        );
+
+        return matched.length > 0 ? matched : users;
+      },
+    },
+  };
+
+  // Put together a schema
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+  expressApp.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+  expressApp.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you want GraphiQL enabled
 };
 
 const init = ({ debug }) => {
@@ -97,6 +138,8 @@ const init = ({ debug }) => {
   app = configTemplates(app);
 
   app.use('/assets', express.static(dirPath('/../public/assets/')));
+
+  enableGraphql(app);
   requireRoutes(app, 'routes');
 
   // catch 404 and forward to error handler

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button.jsx';
+import { fetchGithubUser } from '../actions.js';
 
 class GithubUser extends React.Component {
   static propTypes = {
@@ -15,7 +16,7 @@ class GithubUser extends React.Component {
   };
   onClick = () => {
     const { username, dispatch } = this.props;
-    dispatch({ type: 'USER_FETCH_REQUESTED', payload: { username } });
+    dispatch(fetchGithubUser({ username }));
   };
   render() {
     const { user } = this.props;
