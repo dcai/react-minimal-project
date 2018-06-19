@@ -7,7 +7,8 @@
     "node": ">=8.4.0"
   },
   "scripts": {
-    "gen:fakedata": "node ./bin/gen-fake-data.js",
+    "gen:exp": "node ./bin/gen-exp.js",
+    "gen:redux": "node ./bin/gen-redux.js",
     "start:prod": "npm run build; cross-env NODE_ENV=production node ./server/main.js",
     "start:dev": "cross-env NODE_ENV=development DEBUG=nodejs nodemon ./server/main.js --exec node --config ./server/nodemon.json",
     "build": "cross-env NODE_ENV=production webpack",
@@ -75,10 +76,12 @@
     "eslint-plugin-react": "^7.x",
     "faker": "^4.1.0",
     "mini-css-extract-plugin": "^0.x",
+    "mkdirp": "^0.5.1",
     "nodemon": "^1.x",
     "prettier": "^1.x",
     "react-hot-loader": "^4.x",
     "style-loader": "^0.x",
+    "swagger-parser": "^5.x",
     "webpack": "^4.x",
     "webpack-cli": "^3.x",
     "webpack-dev-middleware": "^3.x",

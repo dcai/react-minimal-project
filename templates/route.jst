@@ -1,0 +1,12 @@
+const express = require('express');
+
+const router = express.Router();
+
+router.<%= method %>('<%= route %>', (req, res) => {
+  /**
+  <%= schema %>
+  */
+  res.render('index', {});
+});
+
+module.exports = router;
