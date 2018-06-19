@@ -1,7 +1,19 @@
 import { combineReducers } from 'redux';
-import { FETCH_REPOS_LOADED, FETCH_REPOS_LOADING, ACTION_CLICK_BUTTON } from './actions.js';
+import { handleAction } from 'redux-actions';
+import {
+  receiveUsers,
+  FETCH_REPOS_LOADED,
+  FETCH_REPOS_LOADING,
+  ACTION_CLICK_BUTTON,
+} from './actions.js';
 
 const rootReducer = combineReducers({
+  users: (state, action) => {
+    if (action.type === `${receiveUsers}`) {
+      return Object.assign({}, state, action.payload.data);
+    }
+    return state || {};
+  },
   data: (state, action) => {
     if (action.type === ACTION_CLICK_BUTTON) {
       return Object.assign({}, state, {

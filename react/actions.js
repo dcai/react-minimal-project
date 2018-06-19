@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createAction } from 'redux-actions';
 
 const GITHUB_ACTION_PREFIX = 'ACTION_GITHUB_REPOS_FETCH';
 
@@ -8,6 +9,15 @@ export const ACTION_CLICK_BUTTON = 'CLICK_BUTTON';
 export const FETCH_REPOS_LOADING = `${GITHUB_ACTION_PREFIX}_LOADING`;
 export const FETCH_REPOS_LOADED = `${GITHUB_ACTION_PREFIX}_LOADED`;
 export const FETCH_REPOS_FAILED = `${GITHUB_ACTION_PREFIX}_FAILED`;
+export const FETCH_GITHUB_USER_REQUEST = 'FETCH_GITHUB_USER_REQUEST';
+
+export const fetchGithubUser = payload => ({
+  type: FETCH_GITHUB_USER_REQUEST,
+  payload,
+});
+
+export const searchUsers = createAction('SEARCH_USERS');
+export const receiveUsers = createAction('RECEIVE_SEARCH_USERS');
 
 export const fetchGithubRepo = payload => ({
   type: FETCH_REPOS_LOADING,
