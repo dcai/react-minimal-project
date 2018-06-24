@@ -1,11 +1,6 @@
 {
   "verbose": true,
-  "watch": [
-    "servers/"
-  ],
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules"
-  ],
+  "watch": ["servers/"],
+  "ignore": ["*.test.js", ".git", "node_modules/**/node_modules"],
   "ext": "js json html"
 }

@@ -1,27 +1,25 @@
 const bodyParser = require('body-parser');
+const chokidar = require('chokidar');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const favicon = require('serve-favicon');
+const debug = require('debug');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('../webpack.config');
 const fs = require('fs');
+const webpackConfig = require('../../webpack.config');
 
 const isDev = process.env.NODE_ENV !== 'production';
 
-function dirPath(dest) {
-  return path.join(__dirname, dest);
-}
+const dirPath = dest => path.join(__dirname, dest);
 
-function addWebpackMiddlewaresToExpressApp({ app, debug }) {
+function addWebpackMiddlewaresToExpressApp({ app }) {
   const compiler = webpack(webpackConfig);
-
   const entries = webpackConfig.entry;
-
   Object.keys(entries).forEach(entryName => {
     entries[entryName].unshift('react-hot-loader/patch');
     // webpack/hot/dev-server will reload the entire page if the HMR update fails
@@ -48,7 +46,7 @@ function addWebpackMiddlewaresToExpressApp({ app, debug }) {
   };
   app.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
   const hotMiddlewareOptions = {
-    log: debug,
+    log: debug('nodejs'),
   };
   app.use(webpackHotMiddleware(compiler, hotMiddlewareOptions));
 
@@ -56,7 +54,7 @@ function addWebpackMiddlewaresToExpressApp({ app, debug }) {
 }
 
 function configTemplates(expressApp) {
-  const templatesPath = path.join(__dirname, 'templates');
+  const templatesPath = path.join(__dirname, '..', 'templates');
   const nunjucksEnv = nunjucks.configure(templatesPath, {
     noCache: isDev,
     autoescape: true,
@@ -71,51 +69,60 @@ function configTemplates(expressApp) {
   return expressApp;
 }
 
-const requireRoutes = (app, dir) => {
-  const routesPath = path.join(__dirname, dir);
+const requireMiddlewares = (app, dir) => {
+  const middlewaresPath = path.join(__dirname, '..', dir);
 
-  fs.readdirSync(routesPath).forEach(file => {
-    const filePath = path.join(__dirname, dir, file);
-    console.info(filePath);
+  fs.readdirSync(middlewaresPath).forEach(file => {
+    const filePath = path.join(middlewaresPath, file);
     // eslint-disable-next-line global-require
-    const route = require(filePath);
-    app.use(route);
+    app.use(require(filePath));
   });
 };
 
 const init = ({ debug }) => {
   let app = express();
   app.use(logger(isDev ? 'dev' : 'common'));
-  app.use(favicon(path.join(__dirname, '/../public/', 'favicon.ico')));
+  app.use(favicon(path.join(__dirname, '../../public/', 'favicon.ico')));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
 
   if (isDev) {
-    app = addWebpackMiddlewaresToExpressApp({ app, debug });
+    app = addWebpackMiddlewaresToExpressApp({ app });
   }
   app = configTemplates(app);
 
   app.use('/assets', express.static(dirPath('/../public/assets/')));
-  requireRoutes(app, 'routes');
 
-  // catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
+  // routes are middlewares too
+  requireMiddlewares(app, 'routes');
+  requireMiddlewares(app, 'middlewares');
 
-  // error handling middleware must have 4 arguments
-  // eslint-disable-next-line no-unused-vars
-  app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = isDev ? err : {};
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error', err);
-  });
   return app;
 };
 
-module.exports = init;
+/**
+ *
+ * ['helpers', 'routes', 'middlewares'].forEach(dir => addWatchDir(path.join(__dirname, dir)));
+ *
+ */
+function addWatchDir(dir, options = {}) {
+  const watcher = chokidar.watch(dir, options);
+  const watchDebug = debug('watcher');
+  watchDebug(`Watching: ${dir}`);
+  watcher.on('ready', () => {
+    watchDebug(`Ready: ${dir}`);
+    watcher.on('all', (eventName, changedPath) => {
+      delete require.cache[changedPath];
+    });
+  });
+}
+
+module.exports = {
+  addWebpackMiddlewaresToExpressApp,
+  configTemplates,
+  dirPath,
+  init,
+  isDev,
+  requireMiddlewares,
+};

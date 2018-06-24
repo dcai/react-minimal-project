@@ -1,13 +1,15 @@
 const appconfig = require('../config');
-const app = require('./app');
-const debug = require('debug')('nodejs');
+const nodeDebug = require('debug')('nodejs');
+const path = require('path');
+
+const { init } = require('./helpers');
 
 const host = process.env.HOST || appconfig.host;
 const port = process.env.PORT || appconfig.port;
 
-app({ debug }).listen(port, host, err => {
+init({ debug: nodeDebug }).listen(port, host, err => {
   if (err) {
-    debug(err);
+    nodeDebug(err);
   }
-  debug(`Listening at http://${host}:${port}/`);
+  nodeDebug(`Listening at http://${host}:${port}/`);
 });

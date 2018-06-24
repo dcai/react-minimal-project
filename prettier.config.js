@@ -1,4 +1,4 @@
-// prettier.config.js
+/* prettier.config.js*/
 module.exports = {
   tabWidth: 2,
   singleQuote: true,
