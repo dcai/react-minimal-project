@@ -3,15 +3,9 @@
 // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
 module.exports = {
   root: true,
-  extends: ['airbnb', 'prettier'],
+  extends: ['@friendlyrobot/eslint-config'],
   plugins: ['babel', 'react', 'prettier'],
   parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
   env: {
     jquery: true,
     browser: true,
@@ -22,16 +16,5 @@ module.exports = {
     console: true,
     window: true,
     document: true,
-  },
-  rules: {
-    'prettier/prettier': 'error',
-    'react/jsx-indent': 'warn',
-    'import/extensions': ['error', 'ignorePackages'],
-    'import/no-dynamic-require': 0,
-    'no-unused-vars': 'warn',
-    'import/no-extraneous-dependencies': [
-      'error',
-      { devDependencies: true, optionalDependencies: false, peerDependencies: false },
-    ],
   },
 };
