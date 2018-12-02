@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from './Button.jsx';
-import { fetchData, fetchGithubRepo } from '../actions.js';
+import { fetchData, fetchGithubRepo } from '../redux/actions.js';
 
 class GithubRepoList extends React.Component {
   static propTypes = {
@@ -43,7 +43,12 @@ class GithubRepoList extends React.Component {
         <div className="form-group">
           <label htmlFor="repoQuery">
             Name:
-            <input type="text" onChange={this.onChange} className="form-control" id="repoQuery" />
+            <input
+              type="text"
+              onChange={this.onChange}
+              className="form-control"
+              id="repoQuery"
+            />
           </label>
         </div>
         {this.props.loading && 'loading'}
