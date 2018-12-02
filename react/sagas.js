@@ -1,6 +1,17 @@
-import { throttle, all, select, call, put, takeEvery } from 'redux-saga/effects';
+import {
+  throttle,
+  all,
+  select,
+  call,
+  put,
+  takeEvery,
+} from 'redux-saga/effects';
 import axios from 'axios';
-import { FETCH_REPOS_LOADING, FETCH_REPOS_FAILED, FETCH_REPOS_LOADED } from './actions.js';
+import {
+  FETCH_REPOS_LOADING,
+  FETCH_REPOS_FAILED,
+  FETCH_REPOS_LOADED,
+} from './actions.js';
 
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ACTION_PREFIX = 'ACTION_GITHUB_REPOS_FETCH';

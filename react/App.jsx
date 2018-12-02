@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap'; // import all js
 import React from 'react';
+import { hot } from 'react-hot-loader';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import GithubUser from './components/GithubUser.jsx';
@@ -25,4 +26,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+export default hot(module)(App);

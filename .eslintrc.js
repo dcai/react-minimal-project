@@ -4,17 +4,7 @@
 module.exports = {
   root: true,
   extends: ['@friendlyrobot/eslint-config'],
-  plugins: ['babel', 'react', 'prettier'],
-  parser: 'babel-eslint',
-  env: {
-    jquery: true,
-    browser: true,
-    node: true,
-    es6: true,
-  },
-  globals: {
-    console: true,
-    window: true,
-    document: true,
+  rules: {
+    'no-unused-vars': 'error',
   },
 };

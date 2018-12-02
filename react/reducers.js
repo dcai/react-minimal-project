@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import { FETCH_REPOS_LOADED, FETCH_REPOS_LOADING, ACTION_CLICK_BUTTON } from './actions.js';
+import {
+  FETCH_REPOS_LOADED,
+  FETCH_REPOS_LOADING,
+  ACTION_CLICK_BUTTON,
+} from './actions.js';
 
 const rootReducer = combineReducers({
   data: (state, action) => {
