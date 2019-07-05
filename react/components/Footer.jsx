@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Footer = props => (
+export const Footer = props => (
   <footer
     className="footer"
     style={{
@@ -19,5 +19,3 @@ const Footer = props => (
 Footer.propTypes = {
   children: PropTypes.element.isRequired,
 };
-
-export default Footer;

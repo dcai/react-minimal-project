@@ -41,7 +41,7 @@ function* fetchRepositories(action) {
   }
 }
 
-export default function* rootSaga() {
+export function* rootSaga() {
   yield all([
     throttle(1000, FETCH_REPOS_LOADING, fetchRepositories),
     takeEvery('USER_FETCH_REQUESTED', fetchUser),
