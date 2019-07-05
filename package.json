@@ -23,7 +23,7 @@
   "author": "Dongsheng Cai <hi@dongsheng.org> (http://dongsheng.org/)",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "@babel/runtime": "^7.4.2",
+    "@babel/runtime": "^7.5.0",
     "axios": "^0.18",
     "body-parser": "^1.x",
     "chokidar": "^2.1.5",
@@ -45,26 +45,26 @@
     "serve-favicon": "^2.x"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-transform-runtime": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.x",
     "@babel/preset-stage-0": "^7.x",
     "@friendlyrobot/eslint-config": "^1.0.2",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
     "cross-env": "^5.x",
     "css-loader": "^2.1.1",
     "debug": "^3.x",
     "mini-css-extract-plugin": "^0.5.0",
-    "nodemon": "^1.18.10",
-    "react-hot-loader": "^4.8.0",
+    "nodemon": "^1.19.1",
+    "react-hot-loader": "^4.12.3",
     "style-loader": "^0.x",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-middleware": "^3.6.1",
-    "webpack-hot-middleware": "^2.x"
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0"
   }
 }
