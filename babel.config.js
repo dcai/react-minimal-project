@@ -5,8 +5,17 @@ module.exports = function(api) {
   api.cache(true);
   const plugins = [
     '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-transform-runtime',
     'react-hot-loader/babel',
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        absoluteRuntime: false,
+        corejs: false,
+        helpers: true,
+        regenerator: true,
+        useESModules: false,
+      },
+    ],
   ];
 
   const presets = [
@@ -14,6 +23,7 @@ module.exports = function(api) {
     [
       '@babel/preset-env',
       {
+        modules: 'umd',
         targets: {
           browsers: ['last 2 versions'],
         },

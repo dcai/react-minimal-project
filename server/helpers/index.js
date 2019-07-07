@@ -1,5 +1,4 @@
 const bodyParser = require('body-parser');
-const chokidar = require('chokidar');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
@@ -100,23 +99,6 @@ const init = ({ debug }) => {
 
   return app;
 };
-
-/**
- *
- * ['helpers', 'routes', 'middlewares'].forEach(dir => addWatchDir(path.join(__dirname, dir)));
- *
- */
-function addWatchDir(dir, options = {}) {
-  const watcher = chokidar.watch(dir, options);
-  const watchDebug = debug('watcher');
-  watchDebug(`Watching: ${dir}`);
-  watcher.on('ready', () => {
-    watchDebug(`Ready: ${dir}`);
-    watcher.on('all', (eventName, changedPath) => {
-      delete require.cache[changedPath];
-    });
-  });
-}
 
 module.exports = {
   addWebpackMiddlewaresToExpressApp,
