@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
@@ -81,6 +82,9 @@ const requireMiddlewares = (app, dir) => {
 const init = ({ debug }) => {
   let app = express();
   app.use(logger(isDev ? 'dev' : 'common'));
+  if (!isDev) {
+    app.use(compression());
+  }
   app.use(favicon(path.join(__dirname, '../../public/', 'favicon.ico')));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
