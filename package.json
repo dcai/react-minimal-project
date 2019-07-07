@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "nps",
-    "start:prod": "npm run build; cross-env NODE_ENV=production node ./server/main.js",
     "postinstall": "nps build"
   },
   "repository": {

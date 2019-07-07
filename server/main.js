@@ -1,7 +1,5 @@
 const appconfig = require('../config');
 const nodeDebug = require('debug')('nodejs');
-const path = require('path');
-
 const { init } = require('./helpers');
 
 const host = process.env.HOST || appconfig.host;

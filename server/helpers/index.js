@@ -91,8 +91,8 @@ const init = ({ debug }) => {
   }
   app = configTemplates(app);
 
-  app.use('/assets', express.static(dirPath('/../public/assets/')));
-
+  const staticPath = dirPath('/../../public/assets/');
+  app.use('/assets', express.static(staticPath));
   // routes are middlewares too
   requireMiddlewares(app, 'routes');
   requireMiddlewares(app, 'middlewares');
