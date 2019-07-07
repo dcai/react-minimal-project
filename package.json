@@ -7,13 +7,9 @@
     "node": ">=8.4.0"
   },
   "scripts": {
+    "start": "nps",
     "start:prod": "npm run build; cross-env NODE_ENV=production node ./server/main.js",
-    "start:dev": "cross-env NODE_ENV=development DEBUG=nodejs,watcher node ./server/main.js",
-    "build": "cross-env NODE_ENV=production webpack",
-    "prettier": "prettier --config ./prettier.config.js --write '{server,react,__{tests,mocks}__}/**/*.js'",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "postinstall": "cross-env NODE_ENV=production npm run build"
+    "postinstall": "nps build"
   },
   "repository": {
     "type": "git",
@@ -54,12 +50,13 @@
     "@friendlyrobot/eslint-config": "^1.0.2",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
-    "cross-env": "^5.x",
     "css-loader": "^2.1.1",
     "debug": "^3.x",
     "mini-css-extract-plugin": "^0.5.0",
     "nodemon": "^1.19.1",
     "react-hot-loader": "^4.12.4",
+    "nps": "^5.9.5",
+    "nps-utils": "^1.7.0",
     "style-loader": "^0.x",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",
