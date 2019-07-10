@@ -25,7 +25,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.x",
     "jquery": "^3.x",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "morgan": "^1.x",
     "nunjucks": "^3.2.0",
     "popper.js": "^1.14.7",
