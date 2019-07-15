@@ -16,7 +16,7 @@ module.exports = {
       default: series.nps('build', 'server.prod'),
     },
     build: {
-      default: `${envProd} webpack`,
+      default: series('node ./postinstall.js', `${envProd} webpack`),
     },
     lint: {
       default: 'eslint .',

@@ -9,5 +9,6 @@ module.exports = {
   extends: ['@friendlyrobot/eslint-config'],
   rules: {
     'no-unused-vars': 'error',
+    'no-console': 'warn',
   },
 };
