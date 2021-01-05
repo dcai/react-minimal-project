@@ -19,7 +19,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "@babel/runtime": "^7.5.1",
-    "axios": "^0.18",
+    "axios": "^0.21",
     "jquery": "^3.x",
     "lodash": "^4.17.14",
     "popper.js": "^1.14.7",
